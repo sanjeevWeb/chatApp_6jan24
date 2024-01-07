@@ -1,0 +1,1 @@
+this chatapp project is developing during sharpener bootcamp, in jan 2024, websocket with node express and mysql technologies are used

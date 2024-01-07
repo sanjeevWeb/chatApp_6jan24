@@ -1,5 +1,6 @@
 const user = require("../models/user.model.js")
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const getSignedUp = async (req,res) => {
     const {username, email, phone_no, password} = req.body
@@ -26,13 +27,16 @@ const getLoggedIn = async (req,res) => {
     }
     const isExist = await user.findOne({ where: { email }});
     if(!isExist){
-        return res.json({ error: 'you are not registered'})
+        return res.json({ error: 'you are not registered', status: 404})
     }
     const isMatched = await bcrypt.compare(password, isExist.dataValues.password);
     if(!isMatched){
-        return res.json({ error: 'wrong credencials'})
+        // this code is only sending status with error code and returs isExist.e. not sending message
+        // return res.status(401).json({ error: 'user not authorized', status: 401})
+        return res.json({ error: 'user not authorized', status: 401})
     }
-    return res.json({ message: 'logged in successfully'})
+    const token = jwt.sign({ id:isExist.dataValues.id}, process.env.JWT_SECRET_KEY)
+    return res.json({ message: 'logged in successfully', token})
 }
 
 module.exports = {

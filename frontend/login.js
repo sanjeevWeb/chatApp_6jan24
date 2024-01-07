@@ -19,9 +19,14 @@ loginForm.addEventListener('submit', async (e) => {
     }
     const obj = { email: emailfield.value, password: passwordfield.value };
     const response = await axios.post(`${baseUrl}/user/login`, obj);
-    if(response.data.error){
+    console.log(response)
+    if(response.status === 401 || response.status === 404 || response.data.error){
         alert(response.data.error)
         return;
     }
+    if(response.data.token){
+        localStorage.setItem('token',JSON.stringify(response.data.token))
+    }
+
     alert('logged in successfully')
 })
