@@ -17,24 +17,26 @@
     </style>
 </head>
 
-<body>
+<body background="./public/bgdot.jpg">
     <div class="container">
         <div class="h-50">
-            <div class="p-1 mb-2 bg-danger-subtle text-emphasis-danger rounded-2">.bg-danger-subtle</div>
-            <div class="p-1 mb-2 bg-warning-subtle text-emphasis-warning rounded-2">.bg-warning-subtle</div>
-            <div class="p-1 mb-2 bg-danger-subtle text-emphasis-danger rounded-2">.bg-danger-subtle</div>
-            <div class="p-1 mb-2 bg-warning-subtle text-emphasis-warning rounded-2">.bg-warning-subtle</div>
+            <div class="p-1 mb-2 bg-primary-subtle text-emphasis-danger rounded-2 fw-bold">.bg-danger-subtle</div>
+            <div class="p-1 mb-2 bg-warning-subtle text-emphasis-warning rounded-2 fw-bold">.bg-warning-subtle</div>
+            <div class="p-1 mb-2 bg-primary-subtle text-emphasis-danger rounded-2 fw-bold">.bg-danger-subtle</div>
+            <div class="p-1 mb-2 bg-warning-subtle text-emphasis-warning rounded-2 fw-bold">.bg-warning-subtle</div>
         </div>
         <div class="h-25 fixed-bottom-form ms-5">
-            <form action="">
-                <input class="form-control" type="text" placeholder="chat here">
-                <button type="button" class="btn btn-secondary mt-2 align-bottom">Send</button>
+            <form id="chatForm">
+                <input class="form-control p-2" id="message" type="text" placeholder="chat here">
+                <button type="submit" class="p-1 mt-2 align-bottom fw-bold" style="background-color: #E9A160;">Send</button>
             </form>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js" integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="chat.js"></script>
 </body>
 
 </html>

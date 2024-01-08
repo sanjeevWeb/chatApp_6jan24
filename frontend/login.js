@@ -25,11 +25,12 @@ loginForm.addEventListener('submit', async (e) => {
         return;
     }
     if(response.data.token){
-        localStorage.setItem('token',JSON.stringify(response.data.token))
+        localStorage.setItem('token',response.data.token)
     }
 
     alert('logged in successfully')
     // showToast(null, 'logged in successfully')
+    window.location.href = './chat.html'
 })
 
 function showToast(error,message) {
