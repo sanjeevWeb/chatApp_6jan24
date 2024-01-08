@@ -12,6 +12,19 @@ const saveChat = async (req, res) => {
     }
 }
 
+const sendAllChat = async(req,res) => {
+    try {
+        const userId = req.user.id;
+        const allMessages = await chat.findAll({ where: { userId }, attributes: ['message']});    
+        console.log('allmessages: ', allMessages)
+        return res.json({ allMessages })
+    }
+     catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
-    saveChat
+    saveChat,
+    sendAllChat
 }
