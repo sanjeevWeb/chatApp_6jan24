@@ -29,4 +29,17 @@ loginForm.addEventListener('submit', async (e) => {
     }
 
     alert('logged in successfully')
+    // showToast(null, 'logged in successfully')
 })
+
+function showToast(error,message) {
+    let html = `<div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                    <div class="toast-body" style="${ error ? 'background-color: #DC3545;' : 'background-color: #2D8A45;'}">
+                        ${ error ? error : message}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>`;
+    document.querySelector('#toastdiv').innerHTML += html
+}
