@@ -12,7 +12,7 @@ chatForm.addEventListener('submit', async (e) => {
         return;
     }
     // alert(response.data.message)
-    getAllChats();
+    // getAllChats();
 })
 
 // i can wrap this logic inside a function and call the function also
@@ -30,3 +30,7 @@ async function getAllChats() {
     })
 
 }
+
+setInterval(() => {
+    // getAllChats()
+}, 1000);
