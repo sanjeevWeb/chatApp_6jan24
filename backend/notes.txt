@@ -1,0 +1,113 @@
+****chatapp without websoket**
+Chat web apps are a pretty interesting thing to be built. It has the 
+ability to send and receive messages instantly between two or more
+ parties in a real time manner. Usually to enable such communication, 
+
+websocket will be used as it enables two-way full duplex communication
+ between client and server through TCP connection
+
+Server Sent Events
+Server Sent Events (SSE) is a standard that enables client to receive 
+stream of messages from a server in a unidirectional way, meaning 
+that only the server is able to send data to the client. So, it’s
+ more like a server pushing data into the clients. Because of its
+ ability to push data to clients, SSE use cases cover things like
+ receiving live score updates, stock price updates, and receiving
+ alerts. In SSE, client will first send request to stream endpoint 
+and then the server will continue on opening HTTP response as long 
+as there are events to be pushed to the client.
+
+A client will send the chat message through HTTP POST to the server. Then,
+ the server will broadcast the message to all clients through SSE. This way, 
+we can replicate the behaviour of two-way communication in a chat app that 
+is usually done with websocket.
+
+Flow of apps:
+
+Client send messages through HTTP POST (AJAX)
+Received by server, broadcast through SSE
+Client received message from SSE, render to browser
+
+============================================================================
+Yes, it is possible to create a node.js application that supports chat
+ without using socket.io. You have these choices:
+
+Use a straight webSocket to "push" to the client. You will need to find or 
+write your own server-side code for handling the webSocket protocol because
+ such code is not built into node by default. The ws module is one such
+ library. If using a plain webSocket, you will likely have to implement
+ on your own some of the functionality that socket.io implements such as
+ auto-reconnect.
+
+Find some other library (besides socket.io) that is built on top of a 
+webSocket that would let you push data to a client.
+
+Invent your own substitute for a webSocket (probably client polling or 
+long polling) and code that. This is what was done before webSockets existed.
+ It is much less efficient than a continuously connected webSocket.
+
+All of these choices involve writing some code that has already been written
+ for you in socket.io so most developers would rather just use the already
+ working and already tested solution rather than reimplement it themselves
+
+I want to make small chat app in nodejs. But every where i found that to 
+achieve this functionality node is used with socket.io. As node was also
+
+ created with push notification in mind so thinking How to create chat app
+ purely in node if possible ?
+
+Yes, it is possible to create a node.js application that supports chat 
+without using socket.io. You have these choices:
+
+Use a straight webSocket to "push" to the client. You will need to find or
+ write your own server-side code for handling the webSocket protocol because
+ such code is not built into node by default. The ws module is one such 
+library. If using a plain webSocket, you will likely have to implement 
+on your own some of the functionality that socket.io implements such as
+ auto-reconnect.
+
+Find some other library (besides socket.io) that is built on top of a 
+webSocket that would let you push data to a client.
+
+Invent your own substitute for a webSocket (probably client polling or 
+long polling) and code that. This is what was done before webSockets existed.
+ It is much less efficient than a continuously connected webSocket.
+
+All of these choices involve writing some code that has already been written
+ for you in socket.io so most developers would rather just use the already
+ working and already tested solution rather than reimplement it themselves.
+
+To get into further detail in your question, you will need to define what
+ "purely in node" means to really answer this question. That's not a well
+ defined term. The socket.io library is just a library written in Javascript
+ just like thousands of other libraries you can use in node.js to get your
+ job done.
+
+As you quickly see with node programming, you can't do very much at all in 
+a default node instance without loading other libaries. Some of these 
+libraries come with a default installation of node (like the fs library or
+ http library, for example) and others are libraries that you install before
+ using (usually as simple as typing "npm install socket.io") and then
+ var io = require("socket.io");.
+
+If you are not going to use the socket.io library, then you need a mechanism
+ for "pushing" data to a client in order to make a chat application work. 
+The only true "push" that has any cross-browser support is a webSocket. 
+A webSocket is what socket.io uses. You could use a webSocket from node 
+without using socket.io, but you'd have to write or find code that implements
+ the webSocket protocol that you can run on node (the ws module is one such 
+library). Such code is not built into node by default.
+
+If you weren't going to use webSocket, then there is no other cross-browser
+ method to "push" data to a browser client. Your only other alternative I'm
+ aware of would be browser polling which isn't actual push, but tries to 
+simulate push by just regularly asking the server if the server has anything
+ new for a particular client. An enhancement to straight polling is
+ "long polling" which was invented before we had actual push with webSockets.
+
+
+All of this problem has already been solved in socket.io so unless you r
+eally just want your own research project to rebuilt similar functionality
+ in your own code, you may as well build on solutions that have already been
+ done by using something like the socket.io library.
+

@@ -3,7 +3,8 @@ const chat = require("../models/chat.model.js")
 const saveChat = async (req, res) => {
     try {
         const userId = req.user.id
-        const { message } = req.body
+        let { message } = req.body
+        message = req.user.username + ': ' + message
         const result = await chat.create({ message, userId: userId })
         return res.json({ message: message })
     }
@@ -15,7 +16,7 @@ const saveChat = async (req, res) => {
 const sendAllChat = async(req,res) => {
     try {
         const userId = req.user.id;
-        const allMessages = await chat.findAll({ where: { userId }, attributes: ['message']});    
+        const allMessages = await chat.findAll({ attributes: ['message']});    
         console.log('allmessages: ', allMessages)
         return res.json({ allMessages })
     }
