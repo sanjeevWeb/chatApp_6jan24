@@ -30,7 +30,8 @@ loginForm.addEventListener('submit', async (e) => {
 
     alert('logged in successfully')
     // showToast(null, 'logged in successfully')
-    window.location.href = './chat.html'
+    // window.location.href = './chat.html'
+    window.location.href = './room.html'
 })
 
 function showToast(error,message) {

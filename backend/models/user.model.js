@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../db/database.js')
+const room = require('./room.model.js')
 
 const user = sequelize.define('User', {
     username: {
@@ -21,10 +22,34 @@ const user = sequelize.define('User', {
     }
 }, {timestamps:true})
 
+
+
+// room.belongsToMany(user, {
+//     through: "user_room",
+//     as: "rooms",
+//     foreignKey: "userId",
+// })
+
+// Define the association function
+const associate = () => {
+    user.belongsToMany(room, {
+        through: "user_room",
+        as: "rooms",
+        foreignKey: "userId",
+    });
+};
+
 sequelize.sync({force: false})
 .then(() => {
     console.log('user table created successfully')
+    associate()
 })
 .catch(err => console.log(err))
+
+// user.belongsToMany(room, {
+//     through: "user_room",
+//     as: "rooms",
+//     foreignKey: "userId",
+// })
 
 module.exports = user
