@@ -16,7 +16,7 @@ chat.belongsTo(user,  {foreignKey : 'userId'})
 room.hasMany(chat)
 chat.belongsTo(room)
 
-sequelize.sync({ force: false})
+sequelize.sync({ force: false })
 .then(() => {
     console.log('chat table created successfully')
 })

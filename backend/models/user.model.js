@@ -9,7 +9,7 @@ const user = sequelize.define('User', {
     },
     email: {
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull: false,
         unique: true,
     },
     phone_no: {
@@ -20,7 +20,7 @@ const user = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     }
-}, {timestamps:true})
+}, { timestamps: true })
 
 
 
@@ -33,18 +33,26 @@ const user = sequelize.define('User', {
 // Define the association function
 const associate = () => {
     user.belongsToMany(room, {
-        through: "user_room",
+        through: "Userroom",
         as: "rooms",
         foreignKey: "userId",
     });
+
+    room.belongsToMany(user, {
+        through: "Userroom",
+        as: "users",
+        foreignKey: "roomId",
+    });
+
+
 };
 
-sequelize.sync({force: false})
-.then(() => {
-    console.log('user table created successfully')
-    associate()
-})
-.catch(err => console.log(err))
+sequelize.sync({ force: false })
+    .then(() => {
+        console.log('user table created successfully')
+        associate()
+    })
+    .catch(err => console.log(err))
 
 // user.belongsToMany(room, {
 //     through: "user_room",
