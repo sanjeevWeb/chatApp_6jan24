@@ -19,7 +19,16 @@ const user = sequelize.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    isImage: {
+        type: DataTypes.STRING,
+    },
+    name: {
+        type: DataTypes.STRING,
+    },
+    data: {
+        type: DataTypes.BLOB("long"),
+    },
 }, { timestamps: true })
 
 
