@@ -11,7 +11,8 @@ const createNewRoom = async (req, res) => {
         if (!roomName) {
             return res.json({ error: 'something wrong' })
         }
-        const result = await room.create({ roomName, userId })
+        const result = await user.createRoom({ roomName }) //AdminId:userId 
+        // look for the membersIds later
         console.log('returned room', result);
         return res.json({ result })
     }
@@ -22,14 +23,37 @@ const createNewRoom = async (req, res) => {
 
 const getAllRooms = async (req, res) => {
     try {
-        const result = await room.findAll()  //{ attributes: ['roomName']}
-        console.log('allRooms', result);
+        // const result = await room.findAll()  //{ attributes: ['roomName']}
+        // console.log('allRooms', result);
+        // const rooms = await user.getRoom(); // throwing error htat user.getRoom() is not a function
+        const rooms = await room.findAll()
+        return res.json({ rooms, message: "All groups succesfully fetched" })
         res.json({ result })
     }
     catch (error) {
         console.log(error)
     }
 }
+
+const getRoomMembersbyId = async (request, response, next) => {
+    try {
+        const { groupId } = request.query;
+        const group = await room.findOne({ where: { id: Number(groupId) } });
+        const AllusersData = await room.getUsers();
+        const users = AllusersData.map((ele) => {
+            return {
+                id: ele.id,
+                name: ele.name,
+            }
+        })
+
+        response.status(200).json({ users, message: "Group members name succesfully fetched" })
+    } catch (error) {
+        console.log(error);
+        return response.status(500).json({ message: 'Internal Server error!' })
+    }
+}
+
 
 const getAllUsersOfRoom = async (req, res) => {
     try {
@@ -74,7 +98,7 @@ const addUserToRoom = async (req, res) => {
     try {
         const roomId = req.params.roomId;
         const userId = req.user.userId;
-        const result = await user_room.create({ username : req.user.username})
+        const result = await room.createUser({ userId,roomId })
         if(!result){
             return res.json({ error: 'something broke'})
         }

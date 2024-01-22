@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../db/database.js')
+const user = require('./user.model.js')
 
 const room = sequelize.define('Room', {
     roomName: {
@@ -8,6 +9,7 @@ const room = sequelize.define('Room', {
     }
 }, { timestamps: true })
 
+// room.belongsTo(user,{foreignKey: 'AdminId',constraints:true,onDelete:'CASCADE'})
 
 sequelize.sync({ force:false })
     .then(() => {

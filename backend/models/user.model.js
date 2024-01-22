@@ -20,15 +20,15 @@ const user = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    isImage: {
-        type: DataTypes.STRING,
-    },
-    name: {
-        type: DataTypes.STRING,
-    },
-    data: {
-        type: DataTypes.BLOB("long"),
-    },
+    // isImage: {
+    //     type: DataTypes.STRING,
+    // },
+    // name: {
+    //     type: DataTypes.STRING,
+    // },
+    // data: {
+    //     type: DataTypes.BLOB("long"),
+    // },
 }, { timestamps: true })
 
 
@@ -53,6 +53,7 @@ const associate = () => {
         foreignKey: "roomId",
     });
 
+    // room.belongsTo(user,{foreignKey: 'AdminId',constraints:true,onDelete:'CASCADE'})
 
 };
 

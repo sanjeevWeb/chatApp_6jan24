@@ -23,12 +23,17 @@ async function fetchRooms() {
     roomElement.classList.add('room');
     roomElement.innerText = room.roomName;
     roomElement.dataset.roomId = room.id;
-    roomElement.addEventListener('click', () => roomElementClickHandler( room.id,room.roomName ))
+    roomElement.addEventListener('click', (e) => roomElementClickHandler( e,room.id,room.roomName ))
     roomsList.appendChild(roomElement);
   });
 }
 
-function roomElementClickHandler (roomId,roomName) {
+function roomElementClickHandler (e,roomId,roomName) {
+  const activeElement = document.querySelector('.active')
+  if(activeElement !== null){
+    activeElement.classList.remove('active')
+  }
+  e.target.classList.add('active')
   const roomHeading = document.querySelector('#roomHeading');
   roomHeading.innerText = roomName
   const joinBtn = document.createElement('button');
