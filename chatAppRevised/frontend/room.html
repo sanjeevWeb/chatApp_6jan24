@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            background-color: #f2f2f2;
+            overflow-y: auto;
+        }
+
+        .main {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+            resize: none;
+        }
+
+        .active {
+            /* background-color: lightblue; */
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div id="roomsList"></div>
+            <button id="createRoomBtn">Create Room</button>
+            <div id="usersList"></div>
+        </div>
+        <div class="main">
+            <div id="roomName"></div><span id="searchField"></span>
+            <div id="messagesList"></div>
+            <h5 id="roomHeading"></h5>
+            <textarea id="messageInput" placeholder="Type your message"></textarea>
+            <button id="sendMessageBtn">Send</button>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+        integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="room.js"></script>
+    <!-- <script src="room.script.js"></script> -->
+</body>
+
+</html>
